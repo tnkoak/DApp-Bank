@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank DApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+    <h1>DApp ระบบธนาคาร (Smart Contract)</h1>
+    <p>รหัสนักศึกษา: 65007905 | ชื่อ: ธนกร สิงห์ก้อม</p>
+
+    <button id="connectButton">Connect Metamask</button>
+
+    <h2>Deposit</h2>
+    <input type="number" id="depositAmount" placeholder="ETH amount">
+    <button id="depositButton">Deposit</button>
+
+    <h2>Withdraw</h2>
+    <input type="number" id="withdrawAmount" placeholder="ETH amount">
+    <button id="withdrawButton">Withdraw</button>
+
+    <h2>Check Balance</h2>
+    <button id="checkBalanceButton">Check Balance</button>
+    <p id="balance"></p>
+</body>
+
+</html>
