@@ -1,4 +1,4 @@
-const contractAddress = "0xA8873687c9F593C877D8B7a981E93A090FA3EF21"; // ✅ ใช้ Address ที่ Deploy แล้ว
+const contractAddress = "0xA8873687c9F593C877D8B7a981E93A090FA3EF21"; // ใช้ Address ที่ Deploy แล้ว
 const abi = [
   {
     "inputs": [],
@@ -53,24 +53,33 @@ document.getElementById('connectButton').onclick = async function () {
 document.getElementById('depositButton').onclick = async function () {
   try {
     const amount = document.getElementById('depositAmount').value;
+    if (!amount || amount <= 0) {
+      alert('❌ Please enter a valid deposit amount');
+      return;
+    }
     const tx = await contract.deposit({ value: ethers.utils.parseEther(amount) });
     await tx.wait();
     alert('✅ Deposit Success');
   } catch (error) {
     console.error(error);
-    alert('❌ Deposit Failed');
+    alert(`❌ Deposit Failed: ${error.data?.message || error.message}`);
   }
 };
 
 document.getElementById('withdrawButton').onclick = async function () {
   try {
     const amount = document.getElementById('withdrawAmount').value;
-    const tx = await contract.withdraw(ethers.utils.parseEther(amount));
+    if (!amount || amount <= 0) {
+      alert('❌ Please enter a valid withdraw amount');
+      return;
+    }
+    const weiAmount = ethers.utils.parseEther(amount).toString(); // แปลง ETH เป็น wei ก่อนส่งเข้า smart contract
+    const tx = await contract.withdraw(weiAmount);
     await tx.wait();
     alert('✅ Withdraw Success');
   } catch (error) {
     console.error(error);
-    alert('❌ Withdraw Failed');
+    alert(`❌ Withdraw Failed: ${error.data?.message || error.message}`);
   }
 };
 
