@@ -1,4 +1,4 @@
-const contractAddress = "0xA8873687c9F593C877D8B7a981E93A090FA3EF21"; // ใช้ Address ที่ Deploy แล้ว
+const contractAddress = "0x849f7B3F66489e38BD417E218308B9f71c20C5Bb"; // ใช้ Address ที่ Deploy แล้ว
 const abi = [
   {
     "inputs": [],
@@ -51,20 +51,19 @@ document.getElementById('connectButton').onclick = async function () {
 };
 
 document.getElementById('depositButton').onclick = async function () {
-  try {
-    const amount = document.getElementById('depositAmount').value;
-    if (!amount || amount <= 0) {
-      alert('❌ Please enter a valid deposit amount');
-      return;
+    try {
+      const amount = document.getElementById('depositAmount').value;
+      const tx = await contract.deposit({
+        value: ethers.utils.parseEther(amount)
+      });
+      await tx.wait();
+      alert('✅ Deposit Success');
+    } catch (error) {
+      console.error(error);
+      alert('❌ Deposit Failed');
     }
-    const tx = await contract.deposit({ value: ethers.utils.parseEther(amount) });
-    await tx.wait();
-    alert('✅ Deposit Success');
-  } catch (error) {
-    console.error(error);
-    alert(`❌ Deposit Failed: ${error.data?.message || error.message}`);
-  }
-};
+  };
+  
 
 document.getElementById('withdrawButton').onclick = async function () {
   try {
